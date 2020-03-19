@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+
+  ide:
+
+    image: myidea:local
+
+    environment:
+
+      - DISPLAY=novnc:0.0
+
+    volumes:
+
+      - /home/ubuntu/test/workdir:/workdir
+
+    depends_on:
+
+      - novnc
+
+    networks:
+
+      - x11
+
+  novnc:  
+
+    image: myvnc:local
+
+    environment:
+
+      - DISPLAY_WIDTH=1920
+
+      - DISPLAY_HEIGHT=1080
+
+      - VNC_PW=vncpasswd
+    ports:
+
+      - "28080:8080"
+
+    networks:
+
+      - x11
+
+networks:
+
+  x11:
